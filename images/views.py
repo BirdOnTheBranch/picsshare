@@ -14,10 +14,8 @@ from .models import Image
 @login_required
 def image_created(request):
     if request.method == 'POST':
-        #form is send 
         form = ImageCreatedForm(data=request.POST)
         if form.is_valid():
-            #form data is valid
             cd = form.cleaned_data
             new_item = form.save(commit=False)
             #assing current user to the item
@@ -52,17 +50,15 @@ def image_list(request):
         # If page is out of range deliver last page of results
         images = paginator.page(paginator.num_pages)
     if request.is_ajax():
-        return render(request,
-                      'images/image/list_ajax.html',
-                      {'section': 'images', 'images': images})
-    return render(request,
-                  'images/image/list.html',
-                   {'section': 'images', 'images': images})
+        return render(request, 'images/image/list_ajax.html', {'section': 'images', 'images': images})
+    
+    return render(request, 'images/image/list.html', {'section': 'images', 'images': images})
 
 
 
 def image_detail(request, id, slug):
     image = get_object_or_404(Image, id=id, slug=slug)
+
     return render(request, 'images/image/detail.html', {'section':'images', 'image': image})
 
 
@@ -83,4 +79,5 @@ def image_like(request):
             return JsonResponse({'status':'ok'})
         except:
             pass
+
     return JsonResponse({'status':'ok'})            

@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'images.apps.ImagesConfig',
     'social_django',
     'sorl.thumbnail',
-
 ]
 
 MIDDLEWARE = [
@@ -133,6 +132,10 @@ LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('logout')
 
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user' : lambda u: reverse_lazy('user_detail', args=[u.username])
+}
+
 #EMAIL_HOST = 'smtp.gmail.com'
 #EMAIL_HOST_USER = 'my_account@gmail.com'
 #EMAIL_HOST_PASSWORD = ''
@@ -144,7 +147,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
-
+    
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
 )
