@@ -3,3 +3,8 @@ Pillow==7.2.0
 social-auth-app-django==2.1.0
 sorl-thumbnail==12.6.3
 #pip install python-social-auth[django]
+
+#Intalar redis en el pc 
+#tampbien redis en python
+redis==3.5.3
+
